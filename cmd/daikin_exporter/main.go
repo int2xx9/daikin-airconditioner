@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/int2xx9/daikin-airconditioner/daikin"
 	"github.com/int2xx9/daikin-airconditioner/echonetlite"
@@ -11,16 +13,22 @@ import (
 	"golang.org/x/exp/slog"
 )
 
+var (
+	optionPort = flag.Int("port", 2112, "port number")
+)
+
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
 	slog.SetDefault(logger)
+
+	flag.Parse()
 
 	handler := newDaikinPrometheusHandler()
 	handler.controller.Logger = logger
 	handler.controller.Start()
 
 	http.Handle("/metrics", handler)
-	http.ListenAndServe(":2112", nil)
+	http.ListenAndServe(":"+strconv.Itoa(*optionPort), nil)
 }
 
 type daikinPrometheusHandler struct {
