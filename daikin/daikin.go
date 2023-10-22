@@ -14,7 +14,6 @@ const (
 	EpcOperationMode                 byte = 0xb0
 	EpcTemperatureSetting            byte = 0xb3
 	EpcHumiditySetting               byte = 0xb4
-	EpcDehumidifyingSetting          byte = 0xba
 	EpcRoomTemperature               byte = 0xbb
 	EpcRoomHumidity                  byte = 0xba
 	EpcOutdoorTemperature            byte = 0xbe

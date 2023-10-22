@@ -107,10 +107,6 @@ func (r QueryRequest) HumiditySetting() QueryRequest {
 	return r.AddEpc(EpcHumiditySetting)
 }
 
-func (r QueryRequest) DehumidifyingSetting() QueryRequest {
-	return r.AddEpc(EpcDehumidifyingSetting)
-}
-
 func (r QueryRequest) RoomTemperature() QueryRequest {
 	return r.AddEpc(EpcRoomTemperature)
 }

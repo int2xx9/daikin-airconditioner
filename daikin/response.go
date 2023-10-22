@@ -142,22 +142,6 @@ func (q QueryResponse) HumiditySetting() (int, error) {
 	return int(data[0]), nil
 }
 
-func (q QueryResponse) DehumidifierStatus() (bool, error) {
-	data, ok := q.data[EpcDehumidifyingSetting]
-	if !ok {
-		return false, ErrNoResponsesForEpc
-	}
-
-	switch data[0] {
-	case 0x41:
-		return true, nil
-	case 0x42:
-		return false, nil
-	}
-
-	return false, ErrUnexpectedValue
-}
-
 func (q QueryResponse) RoomTemperature() (int, error) {
 	data, ok := q.data[EpcRoomTemperature]
 	if !ok {

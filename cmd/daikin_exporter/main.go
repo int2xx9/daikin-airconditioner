@@ -60,7 +60,6 @@ func (handler *daikinPrometheusHandler) updateMetrics() error {
 		RoomTemperature().
 		RoomHumidity().
 		OutdoorTemperature().
-		DehumidifyingSetting().
 		Query()
 	if err != nil {
 		return err
@@ -75,7 +74,6 @@ func (handler *daikinPrometheusHandler) updateMetrics() error {
 	handler.metrics.operationModeSetting.Reset()
 	handler.metrics.temperatureSetting.Reset()
 	handler.metrics.humiditySetting.Reset()
-	handler.metrics.dehumidifyingSetting.Reset()
 	handler.metrics.roomHumidity.Reset()
 	handler.metrics.roomTemperature.Reset()
 	handler.metrics.outdoorTemperature.Reset()
@@ -145,7 +143,6 @@ type daikinMetrics struct {
 	operationModeSetting          *prometheus.GaugeVec
 	temperatureSetting            *prometheus.GaugeVec
 	humiditySetting               *prometheus.GaugeVec
-	dehumidifyingSetting          *prometheus.GaugeVec
 	roomTemperature               *prometheus.GaugeVec
 	roomHumidity                  *prometheus.GaugeVec
 	outdoorTemperature            *prometheus.GaugeVec
@@ -191,10 +188,6 @@ func newDaikinMetrics(reg prometheus.Registerer) daikinMetrics {
 			prometheus.GaugeOpts{Name: "humidity_setting", Help: "humidity setting (0-100%)"},
 			commonLabels,
 		),
-		dehumidifyingSetting: prometheus.NewGaugeVec(
-			prometheus.GaugeOpts{Name: "dehumidifying_setting", Help: "dehumidifying setting (0-100%)"},
-			commonLabels,
-		),
 		roomTemperature: prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{Name: "room_temperature", Help: "room temperature (-127 to 125 degree(s) Celsius)"},
 			commonLabels,
@@ -218,7 +211,6 @@ func newDaikinMetrics(reg prometheus.Registerer) daikinMetrics {
 	reg.MustRegister(metrics.operationModeSetting)
 	reg.MustRegister(metrics.temperatureSetting)
 	reg.MustRegister(metrics.humiditySetting)
-	reg.MustRegister(metrics.dehumidifyingSetting)
 	reg.MustRegister(metrics.roomHumidity)
 	reg.MustRegister(metrics.roomTemperature)
 	reg.MustRegister(metrics.outdoorTemperature)
