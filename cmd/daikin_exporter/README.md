@@ -52,6 +52,6 @@ All available metrics:
 | operation_mode_setting          | b0 | operation mode (1:on, 0:off) |
 | temperature_setting             | b3 | temperature setting (0-50 degree(s) Celsius) |
 | humidity_setting                | b4 | humidity setting (0-100%) |
-| room_humidity                   | ba | room temperature (-127 to 125 degree(s) Celsius) |
-| room_temperature                | bb | room humidity (0-100%) |
+| room_humidity                   | ba | room humidity (0-100%) |
+| room_temperature                | bb | room temperature (-127 to 125 degree(s) Celsius) |
 | outdoor_temperature             | be | outdoor temperature (-127 to 125 degree(s) Celsius) |
