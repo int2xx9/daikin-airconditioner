@@ -17,7 +17,7 @@ var (
 )
 
 const (
-	broadcastAddress = "224.0.23.0:3610"
+	BroadcastAddress = "224.0.23.0:3610"
 )
 
 type Controller struct {
@@ -141,7 +141,7 @@ func (q QueryBuilder) Query(f Frame) ([]QueryResponse, error) {
 		return nil, ErrNotQueryMessage
 	}
 
-	udpAddr, err := net.ResolveUDPAddr("udp", broadcastAddress)
+	udpAddr, err := net.ResolveUDPAddr("udp", BroadcastAddress)
 	if err != nil {
 		return nil, err
 	}
