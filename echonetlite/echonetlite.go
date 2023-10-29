@@ -12,8 +12,9 @@ import (
 )
 
 var (
-	ErrAlreadyStarted  = errors.New("a controller is already started")
-	ErrNotQueryMessage = errors.New("not a query message")
+	ErrAlreadyStarted     = errors.New("a controller is already started")
+	ErrNotQueryMessage    = errors.New("not a query message")
+	ErrUnsupportedMessage = errors.New("unsupported message")
 )
 
 const (
@@ -122,8 +123,27 @@ func (c *Controller) QueryBuilder() *QueryBuilder {
 	}
 }
 
-func (*Controller) Execute(f Frame) error {
-	panic("not implemented")
+func (c *Controller) Execute(addr net.UDPAddr, f Frame) error {
+	if f.Ehd1 != 0x10 || f.Ehd2 != 0x81 || f.Edata.Esv != ServiceTypeSetI {
+		return ErrUnsupportedMessage
+	}
+
+	conn, err := net.DialUDP("udp", nil, &addr)
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+
+	frameBytes, err := f.Serialize()
+	if err != nil {
+		return err
+	}
+	_, err = conn.Write(frameBytes)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 type QueryBuilder struct {
