@@ -19,7 +19,7 @@ func NewRecordRepository(db *sql.DB) *RecordRepository {
 
 func (r *RecordRepository) Add(id string, timestamp time.Time, data map[string]any) (int64, error) {
 	columns := []string{"device_id", "time"}
-	values := []any{id, timestamp}
+	values := []any{id, timestamp.UTC()}
 	placeholders := []string{"$1", "$2"}
 	i := 3
 	for key, value := range data {
