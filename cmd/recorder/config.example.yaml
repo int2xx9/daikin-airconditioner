@@ -1,0 +1,9 @@
+database:
+  username: daikin_user
+  password: daikin
+  database: daikin
+  host: timescaledb
+  port: 5432
+
+scrape:
+  interval: 10s
