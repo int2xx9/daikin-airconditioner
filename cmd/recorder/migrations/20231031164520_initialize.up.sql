@@ -8,7 +8,7 @@ create type operation_mode_type as enum('auto', 'cooling', 'heating', 'dehumidif
 
 create table records(
   device_id char(32) not null,
-  time timestamp not null,
+  time timestamp with time zone not null,
 
   operation_status boolean,
   instantaneous_power_consumption int,
