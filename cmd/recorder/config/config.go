@@ -44,7 +44,9 @@ func loadConfiguration() {
 	viper.AddConfigPath(".")
 
 	if err := viper.ReadInConfig(); err != nil {
-		panic(err)
+		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
+			panic(err)
+		}
 	}
 
 	viper.AutomaticEnv()
