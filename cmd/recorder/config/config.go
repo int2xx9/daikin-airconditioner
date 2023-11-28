@@ -52,6 +52,7 @@ func loadConfiguration() {
 	viper.BindEnv("database.password", "RECORDER_DB_PASSWORD")
 	viper.BindEnv("database.database", "RECORDER_DB_DATABASE")
 	viper.BindEnv("database.host", "RECORDER_DB_HOST")
+	viper.BindEnv("database.port", "RECORDER_DB_PORT")
 	viper.BindEnv("scrape.interval", "RECORDER_SCRAPE_INTERVAL")
 
 	requiredKeys := []string{
