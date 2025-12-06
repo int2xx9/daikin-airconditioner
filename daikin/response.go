@@ -148,7 +148,7 @@ func (q QueryResponse) RoomTemperature() (int, error) {
 		return 0, ErrNoResponsesForEpc
 	}
 
-	return int(data[0]), nil
+	return int(int8(data[0])), nil
 }
 
 func (q QueryResponse) RoomHumidity() (int, error) {
@@ -166,5 +166,5 @@ func (q QueryResponse) OutdoorTemperature() (int, error) {
 		return 0, ErrNoResponsesForEpc
 	}
 
-	return int(data[0]), nil
+	return int(int8(data[0])), nil
 }
