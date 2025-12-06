@@ -98,11 +98,11 @@ func (handler *daikinPrometheusHandler) updateMetrics() error {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "OperationStatus", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.InstantaneousPowerConsumption, handler.metrics.instantaneousPowerConsumption); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.InstantaneousPowerConsumption, handler.metrics.instantaneousPowerConsumption, nil); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "InstantaneousPowerConsumption", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.CumulativePowerConsumption, handler.metrics.cumulativePowerConsumption); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.CumulativePowerConsumption, handler.metrics.cumulativePowerConsumption, nil); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "CumulativePowerConsumption", "error", err)
 		}
 
@@ -110,7 +110,7 @@ func (handler *daikinPrometheusHandler) updateMetrics() error {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "FaultStatus", "error", err)
 		}
 
-		if err := updateNumberWithAutoMetrics(resp.Address, idstr, resp.AirflowRate, handler.metrics.airflowRateAuto, handler.metrics.airflowRateSetting); err != nil {
+		if err := updateNumberWithAutoMetrics(resp.Address, idstr, resp.AirflowRate, handler.metrics.airflowRateSetting, handler.metrics.airflowRateAuto, &airflowRateSettingRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "AirflowRate", "error", err)
 		}
 
@@ -118,23 +118,23 @@ func (handler *daikinPrometheusHandler) updateMetrics() error {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "OperationMode", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.TemperatureSetting, handler.metrics.temperatureSetting); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.TemperatureSetting, handler.metrics.temperatureSetting, &temperatureSettingRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "TemperatureSetting", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.HumiditySetting, handler.metrics.humiditySetting); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.HumiditySetting, handler.metrics.humiditySetting, &humiditySettingRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "HumiditySetting", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.RoomTemperature, handler.metrics.roomTemperature); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.RoomTemperature, handler.metrics.roomTemperature, &roomTemperatureRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "RoomTemperature", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.RoomHumidity, handler.metrics.roomHumidity); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.RoomHumidity, handler.metrics.roomHumidity, &roomHumidityRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "RoomHumidity", "error", err)
 		}
 
-		if err := updateNumberMetrics(resp.Address, idstr, resp.OutdoorTemperature, handler.metrics.outdoorTemperature); err != nil {
+		if err := updateNumberMetrics(resp.Address, idstr, resp.OutdoorTemperature, handler.metrics.outdoorTemperature, &outdoorTemperatureRange); err != nil {
 			slog.Info("[updateMetrics] update failed", "id", idstr, "property", "OutdoorTemperature", "error", err)
 		}
 	}
